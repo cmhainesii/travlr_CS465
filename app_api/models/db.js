@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
-
-// Moved MongoDB URI to untracked .env file at project root for security.
-// Contains MongoDB username and password. 
-
-// Load connection string from .env file
-require("dotenv").config();
-const dbURI = process.env.MONGO_URI;
+const host = process.env.DB_HOST || '127.0.0.1';
+const dbURI = `mongodb://${host}/travlr`;
 
 // Build the connection string and set the connection timeout
 const connect = () => {
