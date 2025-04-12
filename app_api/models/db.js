@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const host = process.env.DB_HOST || '127.0.0.1';
-const dbURI = `mongodb://${host}/travlr`;
+require('dotenv').config();
+
+const dbURI = process.env.MONGO_URI || 'mongodb://127.0.0.1/travlr';
 
 // Build the connection string and set the connection timeout
 const connect = () => {

@@ -41,7 +41,56 @@ const tripsFindByCode = async(req, res) => {
     }
 };
 
+const tripsAddTrip = async(req, res) => {
+    try {
+        const trip = await Model.create({
+            code: req.body.code,
+            name: req.body.name,
+            length: req.body.length,
+            start: req.body.start,
+            resort: req.body.resort,
+            perPerson: req.body.perPerson,
+            image: req.body.image,
+            description: req.body.description
+        });
+        
+        // Return resulting trip
+        return res.status(201).json(trip);
+    } catch (err) {
+        // Database returned an error
+        return res.status(400).json(err);
+    }
+}
+
+// PUT: /trips/:tripCode - Adds a new Trip
+const tripsUpdateTrip = async(req, res) => {
+    const query = await Model
+        .findOneAndUpdate(
+            {'code': req.params.tripCode },
+            {
+                code: req.body.code,
+                name: req.body.name,
+                length: req.body.length,
+                start: req.body.start,
+                resort: req.body.resort,
+                perPerson: req.body.perPerson,
+                image: req.body.image,
+                description: req.body.description
+            }
+        )
+        .exec();
+
+        if(!query) {
+            // Database returned no data
+            return res.status(400).json(err);
+        } else {
+            return res.status(201).json(query);
+        }
+}
+
 module.exports = {
     tripsList,
-    tripsFindByCode
+    tripsFindByCode,
+    tripsAddTrip,
+    tripsUpdateTrip
 };
