@@ -58,6 +58,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "allowedHosts": ["localhost", "sn420.local"]
+          },
           "configurations": {
             "production": {
               "buildTarget": "travlr-admin:build:production"

@@ -10,7 +10,7 @@ const connect = () => {
 
 // Monitor connection events
 mongoose.connection.on('connected', () => {
-    console.log(`Mongoose connected to ${dbURI}`);
+    console.log(`Mongoose connected MongoDB`);
 });
 
 mongoose.connection.on('error', err => {
@@ -42,5 +42,6 @@ connect();
 
 // Import Mongoose schema
 require('./travlr');
+require('./user')
 
 module.exports = mongoose;
